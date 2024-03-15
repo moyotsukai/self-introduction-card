@@ -69,7 +69,7 @@ const drawUselessText = (canvas: HTMLCanvasElement) => {
 export const drawImageFrame = (canvas: HTMLCanvasElement) => {
   const context = canvas.getContext("2d")
   if (!context) { return }
-  context.lineWidth = 10
+  context.lineWidth = 8
   context.strokeStyle = "#fff"
   context.stroke()
   context.ellipse(canvas.width / 2, canvas.height / 2, imageSize / 2, imageSize / 2, 0, 0, Math.PI * 2)
