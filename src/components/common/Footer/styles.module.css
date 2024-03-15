@@ -1,0 +1,23 @@
+.footer {
+  text-align: center;
+  font-size: 10pt;
+  color: #333;
+}
+
+.copy {
+  padding: 4px 0;
+  background-color: hsla(0, 0%, 100%, 0.1);
+  color: #777;
+}
+
+.link {
+  padding: 0 8px;
+  font-size: 14px;
+  color: #595959;
+  text-decoration: underline;
+  transition: all 0.2s ease-out;
+}
+
+.link:hover {
+  color: #3363ff;
+}
