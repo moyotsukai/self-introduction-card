@@ -50,6 +50,12 @@ export default function Home() {
     setItems([])
   }
 
+  const onKeyDownOnAddName = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) {
+      onClickAddName()
+    }
+  }
+
   const onChangeCurrentItem = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentItem(event.target.value)
   }
@@ -62,43 +68,46 @@ export default function Home() {
     setCurrentItem("")
   }
 
+  const onKeyDownOnAddItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) {
+      onClickAddItem()
+    }
+  }
+
   return (
-    <main>
-      <h1 className={styles.title}>
-        自己紹介カード ジェネレータ
-      </h1>
+    <div>
       <div className={styles.overlayContainer}>
         <canvas width={1920} height={1080} ref={canvasRef} className={styles.canvas} />
         <div className={styles.overlay}>
-          <label htmlFor="file" className={`${styles.inputFileLabel} ${file && styles.inputFileLabelWithFile}`}>
+          <label htmlFor="file" className={file ? styles.inputFileLabelWithFile : styles.inputFileLabel}>
             <PlusIcon />
             写真
             <input type="file" accept="image/*" onChange={onChangeFile} className={styles.inputFile} />
           </label>
         </div>
       </div>
-      <div>
-        <button onClick={onClickDownload}>
-          ダウンロード
-        </button>
-      </div>
       {items === null
         ? (
-          <div>
-            <input type="text" placeholder="名前を入力しよう！" value={name} onChange={onChangeName} className={styles.inputText} />
-            <button onClick={onClickAddName}>
-              <ArrowUpIcon />
+          <div className={styles.inputTextContainer}>
+            <input type="text" placeholder="名前を入力しよう！" value={name} onChange={onChangeName} onKeyDown={onKeyDownOnAddName} className={styles.inputText} />
+            <button onClick={onClickAddName} className={styles.addButton}>
+              <ArrowUpIcon width={24} height={24} />
             </button>
           </div>
         )
         : (
-          <div>
-            <input type="text" placeholder="自分を構成する要素を書こう！" value={currentItem} onChange={onChangeCurrentItem} className={styles.inputText} />
-            <button onClick={onClickAddItem}>
-              <ArrowUpIcon />
+          <div className={styles.inputTextContainer}>
+            <input type="text" placeholder="自分を構成する要素を書こう！" value={currentItem} onChange={onChangeCurrentItem} onKeyDown={onKeyDownOnAddItem} className={styles.inputText} />
+            <button onClick={onClickAddItem} className={styles.addButton}>
+              <ArrowUpIcon width={24} height={24} />
             </button>
           </div>
         )}
-    </main>
+      <div className={styles.downloadContainer}>
+        <button onClick={onClickDownload} className={styles.download}>
+          カードをダウンロード
+        </button>
+      </div>
+    </div>
   )
 }
