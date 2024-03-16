@@ -9,6 +9,10 @@ const noto = Noto_Sans_JP({ weight: '500', subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "自己紹介カードジェネレータ",
+  description: "単語を入力して自己紹介カードを作ろう！",
+  openGraph: {
+    images: ["/ogimage.png"]
+  }
 }
 
 export default function RootLayout({

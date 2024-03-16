@@ -97,7 +97,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: Noto Sans JP;
+  font-family: "Noto Sans JP";
   font-weight: 500;
 }
 
@@ -123,7 +123,7 @@
   flex-grow: 1;
   height: 100%;
   border: none;
-  font-family: Noto Sans JP;
+  font-family: "Noto Sans JP";
   font-weight: 500;
 }
 

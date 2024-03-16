@@ -136,13 +136,13 @@ export const drawItem = ({ canvas, item, index }: { canvas: HTMLCanvasElement, i
   context.fillStyle = 'rgba(255, 255, 255, 0.8)'
   const position = itemPositions[index % itemPositions.length]
   if (position.align === "left") {
-    createRoundRectPath(canvas, position.x, position.y, textWidth, 80, 25)
+    createRoundRectPath(canvas, position.x, position.y, textWidth, 80, 20)
     context.fill()
     context.textAlign = "left"
     context.fillStyle = "#3381ff"
     context.fillText(item, position.x + 25, position.y + 58)
   } else {
-    createRoundRectPath(canvas, position.x - textWidth, position.y, textWidth, 80, 25)
+    createRoundRectPath(canvas, position.x - textWidth, position.y, textWidth, 80, 20)
     context.fill()
     context.textAlign = "right"
     context.fillStyle = "#3381ff"
