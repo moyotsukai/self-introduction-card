@@ -42,15 +42,28 @@ const itemPositions: ItemPosition[] = [
   { x: 660, y: 390, align: "right" }
 ]
 
+const gradationAssets: string[] = [
+  "#ff6200",
+  "#ffd000",
+  "#83ff30",
+  "#33ff96",
+  "#00f2ff",
+  "#0066ff",
+  "#6a00ff",
+  "#b300ff",
+  "#ff30a5"
+]
+
 export const drawGradation = (canvas: HTMLCanvasElement) => {
   const context = canvas.getContext("2d")
   if (!context) { return }
   let lineargradient = context.createLinearGradient(0, canvas.height + 200, canvas.width - 400, 0)
   let lineargradient2 = context.createLinearGradient(0, -400, canvas.width, canvas.height + 200)
-  lineargradient.addColorStop(0, '#0066ff')
-  lineargradient.addColorStop(1, '#00f2ff')
+  const shuffled = gradationAssets.slice().sort(() => Math.random() - Math.random())
+  lineargradient.addColorStop(0, shuffled[0])
+  lineargradient.addColorStop(1, shuffled[1])
   lineargradient2.addColorStop(0, 'rgba(255,255,255,0)')
-  lineargradient2.addColorStop(1, '#ffd000')
+  lineargradient2.addColorStop(1, shuffled[2])
   drawUselessText(canvas)
   context.fillStyle = lineargradient
   context.fillRect(0, 0, canvas.width, canvas.height)
@@ -123,13 +136,13 @@ export const drawItem = ({ canvas, item, index }: { canvas: HTMLCanvasElement, i
   context.fillStyle = 'rgba(255, 255, 255, 0.8)'
   const position = itemPositions[index % itemPositions.length]
   if (position.align === "left") {
-    createRoundRectPath(canvas, position.x, position.y, textWidth, 80, 25)
+    createRoundRectPath(canvas, position.x, position.y, textWidth, 80, 20)
     context.fill()
     context.textAlign = "left"
     context.fillStyle = "#3381ff"
     context.fillText(item, position.x + 25, position.y + 58)
   } else {
-    createRoundRectPath(canvas, position.x - textWidth, position.y, textWidth, 80, 25)
+    createRoundRectPath(canvas, position.x - textWidth, position.y, textWidth, 80, 20)
     context.fill()
     context.textAlign = "right"
     context.fillStyle = "#3381ff"

@@ -89,7 +89,7 @@ export default function Home() {
       {items === null
         ? (
           <div className={styles.inputTextContainer}>
-            <input type="text" placeholder="名前を入力しよう！" value={name} onChange={onChangeName} onKeyDown={onKeyDownOnAddName} className={styles.inputText} />
+            <input type="text" placeholder="名前を入力しよう！" value={name} onChange={onChangeName} onKeyDown={onKeyDownOnAddName} autoComplete="off" enterKeyHint="next" className={styles.inputText} />
             <button onClick={onClickAddName} className={styles.addButton}>
               <ArrowUpIcon width={24} height={24} />
             </button>
@@ -97,7 +97,7 @@ export default function Home() {
         )
         : (
           <div className={styles.inputTextContainer}>
-            <input type="text" placeholder="自分を構成する要素を書こう！" value={currentItem} onChange={onChangeCurrentItem} onKeyDown={onKeyDownOnAddItem} className={styles.inputText} />
+            <input type="text" placeholder="自分を構成する要素を書こう！" value={currentItem} onChange={onChangeCurrentItem} onKeyDown={onKeyDownOnAddItem} autoComplete="off" enterKeyHint="next" className={styles.inputText} />
             <button onClick={onClickAddItem} className={styles.addButton}>
               <ArrowUpIcon width={24} height={24} />
             </button>
