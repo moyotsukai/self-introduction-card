@@ -124,6 +124,7 @@
   height: 100%;
   border: none;
   font-family: Noto Sans JP;
+  font-weight: 500;
 }
 
 .addButton {
