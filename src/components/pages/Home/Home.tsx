@@ -12,6 +12,7 @@ export default function Home() {
   const [name, setName] = useState<string>("")
   const [items, setItems] = useState<string[] | null>(null)
   const [currentItem, setCurrentItem] = useState<string>("")
+  const [isInputTextFocused, setIsInputTextFocused] = useState<boolean>(false)
 
   useEffect(() => {
     if (!canvasRef.current) { return }
@@ -62,8 +63,8 @@ export default function Home() {
 
   const onClickAddItem = () => {
     if (!canvasRef.current) { return }
-    drawItem({ canvas: canvasRef.current, item: currentItem, index: Math.max(0, items?.length ?? 0) })
     if (!currentItem) { return }
+    drawItem({ canvas: canvasRef.current, item: currentItem, index: Math.max(0, items?.length ?? 0) })
     setItems((prev) => [...(prev ?? []), currentItem])
     setCurrentItem("")
   }
@@ -74,10 +75,34 @@ export default function Home() {
     }
   }
 
+  const onTextInputFocus = () => {
+    setIsInputTextFocused(true)
+  }
+
+  const onTextInputBlur = () => {
+    setIsInputTextFocused(false)
+  }
+
   return (
     <div>
       <div className={styles.overlayContainer}>
         <canvas width={1920} height={1080} ref={canvasRef} className={styles.canvas} />
+        {items === null
+          ? (
+            isInputTextFocused && (
+              <div className={styles.overlayName}>
+                <div className={styles.borderName} />
+              </div>
+            )
+          )
+          : (
+            isInputTextFocused && (
+              <div className={styles.overlay}>
+                <div className={styles.borderFrame} />
+              </div>
+            )
+          )
+        }
         <div className={styles.overlay}>
           <label htmlFor="file" className={file ? styles.inputFileLabelWithFile : styles.inputFileLabel}>
             <PlusIcon />
@@ -89,7 +114,18 @@ export default function Home() {
       {items === null
         ? (
           <div className={styles.inputTextContainer}>
-            <input type="text" placeholder="名前を入力しよう！" value={name} onChange={onChangeName} onKeyDown={onKeyDownOnAddName} autoComplete="off" enterKeyHint="done" className={styles.inputText} />
+            <input
+              type="text"
+              placeholder="名前を入力しよう！"
+              value={name}
+              onChange={onChangeName}
+              onKeyDown={onKeyDownOnAddName}
+              onFocus={onTextInputFocus}
+              onBlur={onTextInputBlur}
+              autoComplete="off"
+              enterKeyHint="done"
+              className={styles.inputText}
+            />
             <button onClick={onClickAddName} className={styles.addButton}>
               <ArrowUpIcon width={24} height={24} />
             </button>
@@ -97,7 +133,18 @@ export default function Home() {
         )
         : (
           <div className={styles.inputTextContainer}>
-            <input type="text" placeholder="自分を構成する要素を書こう！" value={currentItem} onChange={onChangeCurrentItem} onKeyDown={onKeyDownOnAddItem} autoComplete="off" enterKeyHint="done" className={styles.inputText} />
+            <input
+              type="text"
+              placeholder="自分を構成する要素を書こう！"
+              value={currentItem}
+              onChange={onChangeCurrentItem}
+              onKeyDown={onKeyDownOnAddItem}
+              onFocus={onTextInputFocus}
+              onBlur={onTextInputBlur}
+              autoComplete="off"
+              enterKeyHint="done"
+              className={styles.inputText}
+            />
             <button onClick={onClickAddItem} className={styles.addButton}>
               <ArrowUpIcon width={24} height={24} />
             </button>
