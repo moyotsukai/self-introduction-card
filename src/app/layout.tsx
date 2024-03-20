@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "自己紹介カードジェネレータ",
   description: "単語を入力して自己紹介カードを作ろう！",
   openGraph: {
-    images: ["/ogimage.png"]
+    images: ["https://self-introduction.moyotsukai.dev/ogimage.png"]
   }
 }
 
